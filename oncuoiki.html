@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>on thi cuoi ki</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery-3.6.4.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <style>
+        .error {
+            color: red;
+            font-style: italic;
+        }
+
+        .border-text {
+            border: 1px solid red;
+        }
+
+        [class*="col-"] {
+            padding: 0px;
+        }
+    </style>
+    <script>
+       $(document).ready(function(){
+    //xuli tat cac thanh chuc nang
+    function ktma() {
+        //get set ma
+        let ma = $('#txtma').val()
+        let patma = /^(SP)\d{4}((NK)|(XK))$/;
+        if (patma.test(ma))
+        {
+            $('#erma').html("*");
+            $('#txtma').removeClass('border-text');
+            return true;
+        } else{
+            $('#erma').html('Ma sai');
+            $('#erma').addClass('error');
+            $('#txtma').addClass('border-text');
+            return false;
+        }
+    }
+
+        $('#txtma').blur(function(e) {
+            ktma();
+        });
+
+        $('#btn').click(function(e) {
+            
+            let ma = $('#txtma').val();
+
+            let ngay = $('#txtngay').val();
+
+            let ten = $('#txtten').val();
+
+            let hinhthuc = $("input[name='tt']:checked").val();
+
+            let loai = [];
+            $.each($("input[name='loai']:checked"), function(){
+                loai.push($(this).val());
+            });
+
+            let loaisp = $('#lstloai option:selected').text();
+
+            let thue = $('#lstloai option:selected').val();
+
+            if(ktma()) {
+                let trnew = "<tr><td>" + ma + "</td><td>" + ten + "</td><td>" + ngay + "</td><td>" + 
+                loaisp + "</td><td>"+ loai +"</td><td>"+ hinhthuc +"</td><td>"+ thue+"</td></tr>";
+                $('#ttsp').append(trnew);
+                
+            }
+
+        });
+
+        $("#lstloai").change(function(e){
+            let thue = $('#lstloai option:selected').val();
+            $('#txtthue').val(thue);
+            alert(thue);
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="row">
+            <div class="col-12 bg-info" style="height: 100px;">
+                <h1 class="text-danger text-center" style="text-align: center" >
+                    Header
+                </h1>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-12 bg-success">
+                <div class="nav navbar navbar-expand-sm ">
+                    <ul class="navbar-nav text-info">
+                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">link</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 bg-dark" style="height: 500px;">
+                <div class="nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-iteam" data-toggle="modal" data-target="#myModal"><a href="#" class="nav-link">Form dang ki</a></li>
+                        <li class="nav-iteam"><a href="#" class="nav-link">Link1</a></li>
+                        <li class="nav-iteam"><a href="#" class="nav-link">link2</a></li>
+                        <li class="nav-iteam"><a href="#" class="nav-link">link3</a></li>
+                        <li class="nav-iteam"><a href="#" class="nav-link">link4</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-10 bg-light">
+                <table class="table table-info" id="ttsp">
+                    <thead>
+                        <tr>
+                            <th>Ma</th>
+                            <th>Ten</th>
+                            <th>Ngay</th>
+                            <th>Loai San Pham</th>
+                            <th>hinh thuc</th>
+                            <th>Loai</th>
+                            <th>Thue</th>
+                        </tr>
+                    </thead>  
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-12 bg-primary" style="height: 100px;">
+                  <p>MSSV-Hoten</p>                    
+                </div>
+            </div>     
+        </div>
+    </div>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>
+                        Quan Li san pham
+                    </h1>
+                    <button type="button" class="btn btn-danger"  data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row form-group">
+                            <label for="" class="col-2">
+                                Ma san pham
+                            </label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" id="txtma">
+                                <span id="erma">*</span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Ten</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" id="txtten">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Ngay</label>
+                            <div class="col-10">
+                                <input type="date" class="form-control" name="" id="txtngay" placeholder="dd/mm/yyyy" >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Loai</label>
+                            <div class="col-10">
+                                <select class="form-control" id="lstloai">
+                                    <option value="10%">Nuoc Ngot</option>
+                                    <option value="20%">Nuoc Suoi</option>
+                                    <option value="30%">Banh Keo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Thue</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" readonly="true" id="txtthue">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Thanh toan</label>
+                            <div class="col-10 " >
+                               <label> <input type="radio" name="tt" class="form-check-inline" value="Online"> Online </label>
+                                <label><input type="radio" name="tt" class="form-check-inline" value="Tien mat"> Tien mat </label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-2">Loai hang hoa</label>
+                            <div class="col-10">
+                                <label><input type="checkbox" class="form-check-inline" name="loai" value="Nhap Khau"> Nhap Khau</label>
+                                <label><input type="checkbox" class="form-check-inline" name="loai" value="Xuat Khau"> Xuat Khau</label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-dark" id="btn" type="button" data-dismiss="modal">Nhap kho</button>
+                                <button class="btn btn-danger" data-dismiss="modal">Huy</button>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p>BuiAnhTai_21020981</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
