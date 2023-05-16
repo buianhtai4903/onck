@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery-3.6.4.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <style>
+        .error {
+            color: red;
+            font-style: italic;
+        }
+
+        .border-text {
+            border: 1px solid red;
+        }
+
+        [class*="col-"] {
+            padding: 0px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            function ktma() {
+                let ma = $('#txtma').val()
+                let patma = /^(CF)\d{5}((ICE)|(HOT))$/;
+                if (patma.test(ma))
+                {
+                    $('#erma').html("*");
+                    $('#txtma').removeClass('border-text');
+                    return true;
+                }
+                else {
+                    $('#erma').html('Ma nhap sai');
+                    $('#erma').addClass('error');
+                    $('#txtma').addClass('border-text');
+                    return false;
+                }
+            }
+
+            $('#txtma').blur(function(e) {
+                ktma();
+            });
+
+            $('#btnluu').click(function(e) {
+                let ma = $('#txtma').val();
+
+                let ten = $('#txtten').val();
+
+                let ngay= $('#txtngay').val();
+
+                let hinhthuc= $("input[name='tt']:checked").val();
+
+                let kieu =$("input[name='k']:checked").val();
+
+                let loaisp = $('#listloai option:selected').text();
+
+                let giaca = $('#listloai option:selected').val();
+
+                if(ktma()){
+                    let newtr = "<tr><td>" + ma + "</td><td>" + ten + "</td><td>" + ngay + "</td><td>" +
+                        loaisp + "</td><td>" +hinhthuc +"</td><td>"+ kieu +"</td><td>"+giaca+"</td></tr>";
+                    $('#themnd').append(newtr);
+                }
+
+            });
+
+            $("#listloai").change(function(e){
+                let giaca = $('#listloai option:selected').val();
+                $('#txtgia').val(giaca);
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 bg-info">
+                <button class="btn btn-block" data-toggle="modal" data-target="#myModal">Dang ki</button>
+            </div>
+            <div class="col-1 bg-dark">
+            </div>
+            <div class="col-10 bg-info">
+                <table class="table table-primary" id="themnd">
+                    <tr class="bg-light">
+                        <th>Ma</th>
+                        <th>Ho Ten</th>
+                        <th>Ngay</th>
+                        <th>Loai</th>
+                        <th>Hinh thuc</th>
+                        <th>Kieu</th>
+                        <th>Gia</th>
+                    </tr>
+                    <tr>
+                        <td>CF12345ICE</td>
+                        <td>Abc</td>
+                        <td>14/07/2023</td>
+                        <td>ca phe sua</td>
+                        <td>tien mat</td>
+                        <td>da</td>
+                        <td>15$</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-1 bg-dark">
+            </div>
+        </div>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Nhap thong tin</h1>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            X
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Nhap ma</label></div>
+                                <div class="col-10">
+                                    <input type="text" id="txtma" class="form-control" placeholder="CFXXXXXHOT or CFXXXXXICE" >
+                                    <span id="erma">*</span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for=""> Nhap ho va ten</label></div>
+                                <div class="col-10">
+                                    <input type="text" id="txtten" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Chon Ngay</label></div>
+                                <div class="col-10">
+                                    <input type="date" class="form-control" id="txtngay">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Loai San Pham</label></div>
+                                <div class="col-10">
+                                    <select name="" id="listloai" class="form-control">
+                                        <option value="10$">Ca Phe Da</option>
+                                        <option value="15$">Ca Phe Sua</option>
+                                        <option value="20$">Bac Xiu</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Hinh thuc thanh toan</label></div>
+                                <div class="col-10">
+                                    <label><input type="radio" name="tt" class="form-check-inline" value="Tien Mat">Tien Mat</label>
+                                    <label><input type="radio" name="tt" class="form-check-inline" value="Chuyen Khoan">Chuyen Khoan</label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Kieu</label></div>
+                                <div class="col-10">
+                                    <label><input type="radio" name="k" class="form-check-inline" value="Da">Da</label>
+                                    <label><input type="radio" name="k" class="form-check-inline" value="Nong">Nong</label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"><label for="">Gia</label></div>
+                                <div class="col-10">
+                                    <input type="text" class="form-control" readonly="true" id="txtgia">
+                                </div>
+                            </div> 
+                            <div class="row form-group">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-dark" id="btnluu" data-dismiss="modal">Xac Nhan</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Huy</button>
+                                </div>
+                            </div>                           
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <h1>Tai Bui</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
