@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/jquery-3.6.4.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./doan.js"></script>
+    <style>
+ 
+    </style>
+</head>
+<body>
+    <div class="row bg-light">
+        <div class="text-center col-xl-9">
+            <h2 class="text-danger">DOAN THANH NIEN CONG SAN HO CHI MINH</h2>
+            <h1 class="text-primary">DOAN TRUONG DAI HOC CONG NGHIEP TP.HCM</h1>
+        </div>
+        <div class="col-md-3" >
+            <img src="../THKT/Img/iuh.png" alt="" style="height: 5em; width: 13em; object-fit: contain;">
+        </div>
+    </div>
+   <div  class="p-1 bg-light border">
+    <ul class="list-unstyled d-flex align-items-center ">
+        <li class="pl-3"><a href=""><img src="../THKT/Img/Huy_Hiệu_Đoàn.png" alt="" style="height: 3em; width: 3em;"></a></li>
+        <li class="pl-3"><a href="">Trang chu</a></li>
+        <li class="pl-3"><a href="">su kien</a></li>
+        <li class="pl-3"><a href="">ho tro sinh vien</a></li>
+        <li class="pl-3"><a href="" data-toggle="modal" data-target="#modal">dang ky tinh nguyen</a></li>
+    </ul>
+   </div>
+   <div class="d-flex border border-dark ">
+    <textarea name="" id="" cols="130" rows="5" style="overflow: hidden; resize: none;" class=" border-left-0 border-bottom-0 border-top-0 border-right ">form</textarea>
+    <div class="m-auto">
+        <img src="../THKT/Img/doan_ysqz.jpg" alt="" style="width: 15em; height: 10em; object-fit: contain;" >
+    </div>
+   </div>
+   <div class="p-3">
+    <div class="border-bottom">
+        <h1 class="text-primary">DANH SACH SINH VIEN DANG KY</h1>
+    </div>
+    <table class="table table-borderless" id="table1">
+        <tr class="border-bottom">
+            <th>STT</th>
+            <th>MA SO SINH VIEN</th>
+            <th>HO VA TEN</th>
+            <th>GIOI TINH </th>
+            <th>DIEN THOAI</th>
+            <th>NGAY BAT ĐAU</th>
+            <th>HOAT DONG DANG KY</th>
+            <th>HOAT DONG TINH NGUYEN</th>
+        </tr>
+    </table>
+   </div>
+   <div class="modal fade" id="modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-success">THONG TIN DANG KY</h1>
+                    <button data-dismiss="modal" class="btn btn">X</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/" role="form" id="form">
+                        <div class="form-group row">
+                            <label for="mssv" class="col-xl-3">Ma so sinh vien</label>
+                            <div class="col-md-9">
+                                <input type="text" name="" id="mssv" placeholder="MA SO SINH VIEN" class="form-control" value="21019501" onblur="ktmssv()">
+                                <span class="text-danger" id="tbmssv">(*)</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ten1" class="col-xl-3">Ho va ten sinh vien</label>
+                            <div class="col-md-5">
+                                <input type="text" name="" id="ten1" placeholder="ho va ten dem" class="form-control" onblur="ktten1()" value="Bui Huu">
+                                <span class="text-danger" id="tbhoten">(*)</span>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="" id="ten2" placeholder="ten" class="form-control" onblur="ktten1()" value="Tam">
+                                <span class="text-danger" id="tbten">(*)</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mssv" class="col-xl-3">Gioi tinh</label>
+                            <div class="col-md-9">
+                                <input type="radio" name="gt" id="gt1" value="nam" onblur=" ktgt()">
+                                <label for="Nam" class="mb-0">Nam</label>
+                                <input type="radio" name="gt" id="gt2"  value="nu" onblur=" ktgt()">
+                                <label for="Nu" class="mb-0">Nu</label>
+                                <span id="tbgt">*</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="mssv" class="col-xl-3">Dien thoai</label>
+                            <div class="col-md-9">
+                                <input type="text" name="" id="dt" placeholder="Dien thoai" class="form-control" onblur="ktdt()" value="0918132062">
+                                <span class="text-danger" id="tbdt">(*)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mssv" class="col-xl-3">Ngay co the bat dau</label>
+                            <div class="col-md-9">
+                                <input type="date" name="" id="days" placeholder="" class="form-control" onblur="ktdays()">
+                                <span class="text-danger" id="tbdays"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mssv" class="col-xl-3">Hoat dong dang ky</label>
+                            <div class="col-md-9">
+                                <select name="h" id="hddk" class="form-control">
+                                    <option value="1">Thanh nien tinh nguyen he</option>
+                                    <option value="2">ve sinh moi truong</option>
+                                    <option value="3">tiep suc mua thi</option>
+                                    <option value="4">tinh nguyen vien chong dich</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="hdtn" class="col-xl-3">Hoat dong tinh nguyen</label>
+                            <div class="col-md-9">
+                                <input type="checkbox" name="hdtn" id="hdtn1" value="ngan han" onblur="kthd()">
+                                <label for="hd1" class="mb-0">Ngan han</label>
+                                <input type="checkbox" name="hdtn" id="hdtn2" value="thuong xuyen" onblur="kthd()">
+                                <label for="hd2" class="mb-0">thuong xuyen </label>
+                                <input type="checkbox" name="hdtn" id="hdtn3" value="dai han" onblur="kthd()">
+                                <label for="hd3">dai han</label>
+                                <span id="tbhdtn"> </span>
+                            </div>
+
+                        </div>
+                        <div>
+                            <button class="btn btn-success " type="button" onclick="button1()">DANG KY</button>
+                            <button class="btn btn-success ml-1" type="reset">XOA RONG</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div>
+   <script src="./doan.js"></script>
+    <script src="./js/jquery-3.6.4.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</body>
+</html>
